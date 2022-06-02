@@ -1,0 +1,57 @@
+1. As user I want to see the main page.
+	Tasks:
+	- create render template for index.html
+	- template has product card, recipes card and about card
+	- template has login, register button at the top of the screen
+	- there is logo of the company at the top of the screen
+2. As user I want to be able to login to my account at any moment during browsing.
+	Tasks:
+	- create render template for login.html.
+	- create functional login button
+	- there is forgot my login credentials redirect
+3. As user I want to register new account at any moment during browsing
+	Tasks:
+	- create database 
+		- determine database structure
+		- model layer (Entities, Data) has User
+		- create Admin User
+	- create render template for register.html.
+	- create functional register button.
+4. As user I want to be able to see the product card
+	Tasks:
+	- product card contains product information
+	- product card contains product images
+	- there is 3d rotatable model of the product embeded on the product card (three.js)
+	- there is order button with price and quantity setting
+5. As user I want to be able to see the recipes card
+	Tasks:
+	- determine recipes display style
+	- determine voting, commenting, adding GUI
+	- determine authorization levels
+6. As user I want to be able to add new recipe
+	Tasks:
+	- implement adding recipes to database
+	- model layer (Entities, Data) has Recipe
+7. As user I want to see details of recipe
+	Tasks:
+	- determine recipe details display style
+	- add voting/commenting GUI
+8. As user I want to upvote/downvote other user's recipes
+	Tasks:
+	- determine locations of voting display
+	- REST api for voting system
+	- Vote casting logic
+	- Auth levels
+9. As user I want to be redirected to order page when I click "order" button in the product card
+	Tasks:
+	- create preliminary redirect to Allegro page.
+	- create render template for order placement
+	- model layer (Entities, Data) has BillingDetails
+	- order is processed via external payment processor
+10. As user I want to be able to add comment's to recipes and other people's comments
+	Tasks:
+	- implement adding comments to database
+	- model layer (Entities, Data) has UserComment
+11. OPTIONAL: As user I want to be asked to register after order is placed. (This task is only relevant for later development with external payment processor)
+	Tasks:
+	- research this subject
