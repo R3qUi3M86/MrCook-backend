@@ -25,4 +25,8 @@ public class UserService implements UserDetailsService {
     public void putNewUser(User user){
         userRepository.save(user);
     }
+
+    public User getDefaultUser(){
+        return userRepository.getById((long) 1);
+    }
 }
