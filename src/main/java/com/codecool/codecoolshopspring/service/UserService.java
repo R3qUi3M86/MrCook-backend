@@ -22,7 +22,7 @@ public class UserService implements UserDetailsService {
         return userDetails.orElseThrow(() -> new UsernameNotFoundException("User: "+username+" Not found"));
     }
 
-    public void putNewUser(User user){
+    public void updateUser(User user){
         userRepository.save(user);
     }
 

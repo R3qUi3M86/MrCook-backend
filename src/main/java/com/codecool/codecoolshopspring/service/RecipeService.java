@@ -4,6 +4,7 @@ import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.recipes.CookingPhase;
 import com.codecool.codecoolshopspring.model.recipes.MealComponent;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
+import com.codecool.codecoolshopspring.model.recipes.RecipeDTO;
 import com.codecool.codecoolshopspring.repository.CookingPhaseRepository;
 import com.codecool.codecoolshopspring.repository.MealComponentRepository;
 import com.codecool.codecoolshopspring.repository.RecipeRepository;
@@ -31,10 +32,10 @@ public class RecipeService {
         log.info("User added new recipe: " + recipe);
     }
 
-    public Recipe getRecipe(long id){
+    public RecipeDTO getRecipe(long id){
         Optional<Recipe> optRecipe = recipeRepository.findById(id);
         if (optRecipe.isPresent()){
-            return optRecipe.get();
+            return new RecipeDTO(optRecipe.get());
         } else {
             log.warn("Recipe id=" + id + " not found in database!");
             return null;
@@ -72,6 +73,13 @@ public class RecipeService {
             cookingPhaseRepository.deleteAll(optRecipe.get().getCookingPhases());
         } else {
             log.warn("Cannot delete recipe with given Id - does not exist in database!");
+        }
+    }
+
+    public void upVoteRecipe(long id){
+        Optional<Recipe> optRecipe = recipeRepository.findById(id);
+        if (optRecipe.isPresent()){
+
         }
     }
 }

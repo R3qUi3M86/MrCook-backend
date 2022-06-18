@@ -1,6 +1,7 @@
 package com.codecool.codecoolshopspring.model.recipes;
 
 import com.codecool.codecoolshopspring.model.User;
+import com.codecool.codecoolshopspring.model.comments.RecipeComment;
 import com.codecool.codecoolshopspring.utilities.ImageConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,12 +29,12 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user")
     private User user;
 
     @NotNull
-    private String description;
+    private String title;
 
     @NotNull
     @OneToMany
@@ -44,29 +46,18 @@ public class Recipe {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<CookingPhase> cookingPhases;
 
+//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JoinColumn
+//    private List<RecipeComment> recipeComments = new ArrayList<>();
+
     private byte[] image;
-
-    public Recipe(String description, User user, List<MealComponent> mealComponents, List<CookingPhase> cookingPhases, Image image) throws IOException {
-        this.user = user;
-        this.description = description;
-        this.mealComponents = mealComponents;
-        this.cookingPhases = cookingPhases;
-        this.image = ImageConverter.convertImgToBytea(image);
-    }
-
-    public Recipe(String description, User user, List<MealComponent> mealComponents, List<CookingPhase> cookingPhases) {
-        this.user = user;
-        this.description = description;
-        this.mealComponents = mealComponents;
-        this.cookingPhases = cookingPhases;
-    }
 
     @Override
     public String toString() {
         return "Recipe{" +
                 "id=" + id +
                 ", user=" + user.getUsername() +
-                ", description='" + description + '\'' +
+                ", description='" + title + '\'' +
                 ", mealComponents=" + mealComponents +
                 ", cookingPhases=" + cookingPhases +
                 ", image=" + Arrays.toString(image) +

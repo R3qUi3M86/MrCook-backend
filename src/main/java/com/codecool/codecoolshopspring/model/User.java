@@ -1,19 +1,17 @@
 package com.codecool.codecoolshopspring.model;
 
+import com.codecool.codecoolshopspring.model.comments.ProductComment;
+import com.codecool.codecoolshopspring.model.comments.RecipeComment;
+//import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @Entity
@@ -21,18 +19,30 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @NotNull
     private String username;
+
     @Email
     @NotNull
     private String email;
+
     @NotNull
     private String password;
+
     @NotNull
     private String roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_product_comment")
+    private ProductComment productComment;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecipeComment> recipeComments = new ArrayList<>();
 
 
     public User(String username, String email, String password, String roles) {

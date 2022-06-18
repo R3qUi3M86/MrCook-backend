@@ -17,12 +17,15 @@ public class CookingPhase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @NotNull
     private Integer step;
+
     @NotNull
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private List<Ingredient> ingredients;
+
     @NotNull
     @Enumerated(EnumType.STRING)
     private CookingPhaseName cookingPhaseName;

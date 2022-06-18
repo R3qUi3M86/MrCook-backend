@@ -3,6 +3,7 @@ package com.codecool.codecoolshopspring.controller.rest;
 import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.recipes.MealComponent;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
+import com.codecool.codecoolshopspring.model.recipes.RecipeDTO;
 import com.codecool.codecoolshopspring.service.RecipeService;
 import com.codecool.codecoolshopspring.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -13,9 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 public class RecipeRestController {
 
     private final RecipeService recipeService;
@@ -28,7 +29,7 @@ public class RecipeRestController {
     }
 
     @GetMapping("/recipes/get/{id}")
-    public Recipe getRecipe(@PathVariable String id){
+    public RecipeDTO getRecipe(@PathVariable String id){
         return recipeService.getRecipe(Long.parseLong(id));
     }
 
