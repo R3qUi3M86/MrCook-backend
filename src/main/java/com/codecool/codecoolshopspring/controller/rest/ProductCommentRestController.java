@@ -22,13 +22,7 @@ public class ProductCommentRestController {
     @PostMapping("/product_comment/add")
     public void addProductComment(@RequestBody ProductComment comment){
         User user = userService.getDefaultUser();
-        if (user.getProductComment() == null) {
-            productCommentService.createProductComment(comment, user);
-            user.setProductComment(comment);
-            userService.updateUser(user);
-        } else {
-            log.info("User tried to comment product more than once.");
-        }
+        productCommentService.createProductComment(comment, user);
     }
 
     @GetMapping("/product_comment/get_all")
@@ -42,7 +36,7 @@ public class ProductCommentRestController {
     }
 
     @DeleteMapping("/product_comment/delete/{id}")
-    public void deleteRecipe(@PathVariable String id){
+    public void deleteProductComment(@PathVariable String id){
         User user = userService.getDefaultUser();
         productCommentService.deleteProductComment(Long.parseLong(id), user);
     }

@@ -3,10 +3,8 @@ package com.codecool.codecoolshopspring.service;
 import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.comments.ProductComment;
 import com.codecool.codecoolshopspring.model.comments.ProductCommentDTO;
-import com.codecool.codecoolshopspring.model.recipes.CookingPhase;
-import com.codecool.codecoolshopspring.model.recipes.MealComponent;
-import com.codecool.codecoolshopspring.model.recipes.Recipe;
 import com.codecool.codecoolshopspring.repository.ProductCommentRepository;
+import com.codecool.codecoolshopspring.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,11 +19,17 @@ import java.util.stream.Collectors;
 public class ProductCommentService {
 
     private final ProductCommentRepository productCommentRepository;
+    private final UserRepository userRepository;
 
     public void createProductComment(ProductComment comment, User user) {
-        comment.setUser(user);
-        productCommentRepository.save(comment);
-        log.info("User commented on product: " + comment);
+        if (user.getProductComment() == null) {
+            user.setProductComment(comment);
+            userRepository.save(user);
+            comment.setUser(user);
+            log.info("User commented on product: " + comment);
+        } else {
+            log.warn("User tried to comment product more than once. Comment discarded!");
+        }
     }
 
     public List<ProductCommentDTO> getAll(){
@@ -41,7 +45,7 @@ public class ProductCommentService {
             productCommentRepository.save(oldComment);
             log.info("User updated product comment: " + oldComment);
         } else {
-            log.warn("Cannot update recipe with given Id - does not exist in database!");
+            log.warn("Cannot update product comment id=" + updatedComment.getId() + " - does not exist in database!");
         }
 
     }
@@ -50,10 +54,10 @@ public class ProductCommentService {
         Optional<ProductComment> optProductComment = productCommentRepository.findById(id);
         if (optProductComment.isPresent()){
             user.setProductComment(null);
-            productCommentRepository.deleteById(id);
+            userRepository.save(user);
             log.info("User deleted product comment: " + optProductComment.get());
         } else {
-            log.warn("Cannot delete product comment with given Id - does not exist in database!");
+            log.warn("Cannot delete product comment id=" + id + " - does not exist in database!");
         }
     }
 

@@ -1,8 +1,6 @@
 package com.codecool.codecoolshopspring.service;
 
 import com.codecool.codecoolshopspring.model.User;
-import com.codecool.codecoolshopspring.model.recipes.CookingPhase;
-import com.codecool.codecoolshopspring.model.recipes.MealComponent;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
 import com.codecool.codecoolshopspring.model.recipes.RecipeDTO;
 import com.codecool.codecoolshopspring.repository.CookingPhaseRepository;
@@ -12,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -26,8 +23,8 @@ public class RecipeService {
 
     public void createUserRecipe(Recipe recipe, User user) {
         recipe.setUser(user);
-        cookingPhaseRepository.saveAll(recipe.getCookingPhases());
-        mealComponentRepository.saveAll(recipe.getMealComponents());
+        recipe.setMealComponentsRelation();
+        recipe.setCookingPhasesRelation();
         recipeRepository.save(recipe);
         log.info("User added new recipe: " + recipe);
     }
@@ -45,21 +42,12 @@ public class RecipeService {
     public void updateRecipe(Recipe updatedRecipe){
         Optional<Recipe> optOldRecipe = recipeRepository.findById(updatedRecipe.getId());
         if (optOldRecipe.isPresent()){
-            List<Long> mealComponentIds = optOldRecipe.get().getMealComponents().stream()
-                    .map(MealComponent::getId).toList();
-            List<Long> cookingPhaseIds = optOldRecipe.get().getCookingPhases().stream()
-                    .map(CookingPhase::getId).toList();
-
-            updatedRecipe.setUser(optOldRecipe.get().getUser());
-            cookingPhaseRepository.saveAll(updatedRecipe.getCookingPhases());
-            mealComponentRepository.saveAll(updatedRecipe.getMealComponents());
-            recipeRepository.save(updatedRecipe);
-
-            mealComponentRepository.deleteAllById(mealComponentIds);
-            cookingPhaseRepository.deleteAllById(cookingPhaseIds);
-            log.info("User updated recipe: " + updatedRecipe);
+            Recipe oldRecipe = optOldRecipe.get();
+            oldRecipe.update(updatedRecipe);
+            recipeRepository.save(oldRecipe);
+            log.info("User updated recipe: " + oldRecipe);
         } else {
-            log.warn("Cannot update recipe with given Id - does not exist in database!");
+            log.warn("Cannot update recipe id=" + updatedRecipe.getId() +" - does not exist in database!");
         }
 
     }
@@ -72,7 +60,7 @@ public class RecipeService {
             mealComponentRepository.deleteAll(optRecipe.get().getMealComponents());
             cookingPhaseRepository.deleteAll(optRecipe.get().getCookingPhases());
         } else {
-            log.warn("Cannot delete recipe with given Id - does not exist in database!");
+            log.warn("Cannot delete recipe id="+ id +"  - does not exist in database!");
         }
     }
 

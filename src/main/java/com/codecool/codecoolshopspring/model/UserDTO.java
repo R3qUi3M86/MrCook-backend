@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public class UserDTO {
 
-    private long id;
-    private String username;
+    private final long id;
+    private final String username;
 
     public UserDTO(User user){
         this.id = user.getId();

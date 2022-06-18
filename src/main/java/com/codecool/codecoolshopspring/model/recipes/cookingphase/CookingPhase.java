@@ -1,5 +1,7 @@
-package com.codecool.codecoolshopspring.model.recipes;
+package com.codecool.codecoolshopspring.model.recipes.cookingphase;
 
+import com.codecool.codecoolshopspring.model.recipes.Ingredient;
+import com.codecool.codecoolshopspring.model.recipes.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,10 @@ public class CookingPhase {
     @NotNull
     private Integer step;
 
-    @NotNull
+    @ManyToOne
+    @JoinColumn(name="fk_recipe")
+    private Recipe recipe;
+
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private List<Ingredient> ingredients;
@@ -30,4 +35,15 @@ public class CookingPhase {
     @Enumerated(EnumType.STRING)
     private CookingPhaseName cookingPhaseName;
     private Integer duration;
+
+    @Override
+    public String toString() {
+        return "CookingPhase{" +
+                "id=" + id +
+                ", step=" + step +
+                ", ingredients=" + ingredients +
+                ", cookingPhaseName=" + cookingPhaseName +
+                ", duration=" + duration +
+                '}';
+    }
 }

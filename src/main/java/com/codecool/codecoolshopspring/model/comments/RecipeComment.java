@@ -1,10 +1,8 @@
 package com.codecool.codecoolshopspring.model.comments;
 
 import com.codecool.codecoolshopspring.model.User;
-//import com.codecool.codecoolshopspring.model.votes.ProductCommentVote;
 //import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,16 +29,16 @@ public class RecipeComment {
     @NotNull
     private String body;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="fk_user", nullable=false)
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name="recipe_id", nullable=false)
-//    private Recipe recipe;
+    @ManyToOne
+    @JoinColumn(name="fk_recipe", nullable = false)
+    private Recipe recipe;
 
 //    @OneToMany(mappedBy = "recipe_comment")
-//    private List<RecipeCommentVote> recipeCommentVotes;
+//    private List<RecipeCommentVote> recipeCommentVotes  = new ArrayList<>();
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -50,11 +48,21 @@ public class RecipeComment {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 
-    public RecipeComment(String title, String body, User user, Recipe recipe) {
-        this.title = title;
-        this.body = body;
-        this.user = user;
-//        this.recipe = recipe;
-//        this.recipeCommentVotes = new ArrayList<>();
+    public void update(RecipeComment recipeComment){
+        this.title = recipeComment.getTitle();
+        this.body = recipeComment.getBody();
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeComment{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", user=" + user.getUsername() +
+                ", recipe=" + recipe.getId() +
+                ", createDate=" + createDate +
+                ", modifyDate=" + modifyDate +
+                '}';
     }
 }

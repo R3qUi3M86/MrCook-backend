@@ -2,7 +2,6 @@ package com.codecool.codecoolshopspring.model;
 
 import com.codecool.codecoolshopspring.model.comments.ProductComment;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
-//import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,7 +36,7 @@ public class User implements UserDetails {
     @NotNull
     private String roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "fk_product_comment")
     private ProductComment productComment;
 

@@ -9,7 +9,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -35,7 +37,7 @@ public class ProductComment {
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "product_comment_id")
-//    private List<ProductCommentVote> productCommentVotes;
+//    private List<ProductCommentVote> productCommentVotes = new ArrayList<>();
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)

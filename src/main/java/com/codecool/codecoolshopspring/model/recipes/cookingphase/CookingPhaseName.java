@@ -1,4 +1,4 @@
-package com.codecool.codecoolshopspring.model.recipes;
+package com.codecool.codecoolshopspring.model.recipes.cookingphase;
 
 import lombok.Getter;
 

@@ -1,27 +1,22 @@
 package com.codecool.codecoolshopspring.model.comments;
 
-import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.UserDTO;
 import lombok.Getter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
 public class ProductCommentDTO {
 
 
-    private long id;
-    private String title;
-    private String body;
-    private Integer rating;
-    private UserDTO userDTO;
+    private final long id;
+    private final String title;
+    private final String body;
+    private final Integer rating;
+    private final UserDTO userDTO;
 //    private List<ProductCommentVote> productCommentVotes;
-    private Date createDate;
-    private Date modifyDate;
+    private final Date createDate;
+    private final Date modifyDate;
 
     public ProductCommentDTO(ProductComment productComment) {
         this.id = productComment.getId();

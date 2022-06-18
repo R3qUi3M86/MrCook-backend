@@ -1,18 +1,13 @@
 package com.codecool.codecoolshopspring.controller.rest;
 
 import com.codecool.codecoolshopspring.model.User;
-import com.codecool.codecoolshopspring.model.recipes.MealComponent;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
 import com.codecool.codecoolshopspring.model.recipes.RecipeDTO;
 import com.codecool.codecoolshopspring.service.RecipeService;
 import com.codecool.codecoolshopspring.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
-import java.util.NoSuchElementException;
 
 @Slf4j
 @RestController
