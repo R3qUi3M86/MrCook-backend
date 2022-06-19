@@ -1,21 +1,15 @@
 package com.codecool.codecoolshopspring.controller.rest;
 
 import com.codecool.codecoolshopspring.model.User;
-import com.codecool.codecoolshopspring.model.comments.ProductComment;
-import com.codecool.codecoolshopspring.model.comments.ProductCommentDTO;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
 import com.codecool.codecoolshopspring.model.comments.RecipeCommentDTO;
-import com.codecool.codecoolshopspring.model.recipes.Recipe;
-import com.codecool.codecoolshopspring.service.ProductCommentService;
 import com.codecool.codecoolshopspring.service.RecipeCommentService;
-import com.codecool.codecoolshopspring.service.RecipeService;
 import com.codecool.codecoolshopspring.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -26,7 +20,7 @@ public class RecipeCommentRestController {
 
     @PostMapping("/recipe_comment/add/{recipeId}")
     public void addRecipeComment(@RequestBody RecipeComment comment, @PathVariable String recipeId){
-        User user = userService.getDefaultUser();
+        User user = userService.getDefaultAdminUser();
         recipeCommentService.createRecipeComment(comment, user, Long.parseLong(recipeId));
     }
 

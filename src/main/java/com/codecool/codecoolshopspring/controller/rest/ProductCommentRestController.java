@@ -3,7 +3,6 @@ package com.codecool.codecoolshopspring.controller.rest;
 import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.comments.ProductComment;
 import com.codecool.codecoolshopspring.model.comments.ProductCommentDTO;
-import com.codecool.codecoolshopspring.model.recipes.Recipe;
 import com.codecool.codecoolshopspring.service.ProductCommentService;
 import com.codecool.codecoolshopspring.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,7 @@ public class ProductCommentRestController {
 
     @PostMapping("/product_comment/add")
     public void addProductComment(@RequestBody ProductComment comment){
-        User user = userService.getDefaultUser();
+        User user = userService.getDefaultAdminUser();
         productCommentService.createProductComment(comment, user);
     }
 
@@ -37,7 +36,7 @@ public class ProductCommentRestController {
 
     @DeleteMapping("/product_comment/delete/{id}")
     public void deleteProductComment(@PathVariable String id){
-        User user = userService.getDefaultUser();
+        User user = userService.getDefaultAdminUser();
         productCommentService.deleteProductComment(Long.parseLong(id), user);
     }
 }

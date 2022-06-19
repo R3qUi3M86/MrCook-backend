@@ -24,7 +24,7 @@ public class CookingPhase {
     private Integer step;
 
     @ManyToOne
-    @JoinColumn(name="fk_recipe")
+    @JoinColumn(name="fk_recipe", nullable=false)
     private Recipe recipe;
 
     @ElementCollection

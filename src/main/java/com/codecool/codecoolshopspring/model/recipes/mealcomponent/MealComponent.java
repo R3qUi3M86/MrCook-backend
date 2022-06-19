@@ -20,7 +20,7 @@ public class MealComponent {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name="fk_recipe")
+    @JoinColumn(name="fk_recipe", nullable = false)
     private Recipe recipe;
 
     @NotNull

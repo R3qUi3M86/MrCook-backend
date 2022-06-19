@@ -4,6 +4,8 @@ import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
 import com.codecool.codecoolshopspring.model.recipes.cookingphase.CookingPhase;
 import com.codecool.codecoolshopspring.model.recipes.mealcomponent.MealComponent;
+import com.codecool.codecoolshopspring.model.votes.RecipeVote;
+import com.codecool.codecoolshopspring.model.votes.VoteType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +36,10 @@ public class Recipe {
 
     @NotNull
     private String title;
+
+    @NotNull
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecipeVote> recipeVotes = new ArrayList<>();
 
     @NotNull
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -85,6 +91,18 @@ public class Recipe {
         updateMealComponents(recipe.getMealComponents());
         updateCookingPhases(recipe.getCookingPhases());
         this.image = recipe.getImage();
+    }
+
+    public void withdrawVote(RecipeVote recipeVote){
+        recipeVotes.remove(recipeVote);
+    }
+
+    public void castVote(User user, VoteType voteType){
+        recipeVotes.add(RecipeVote.builder()
+                .voteType(voteType)
+                .user(user)
+                .recipe(this)
+                .build());
     }
 
     @Override

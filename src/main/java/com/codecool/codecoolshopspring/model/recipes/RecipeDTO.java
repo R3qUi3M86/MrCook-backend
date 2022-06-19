@@ -2,10 +2,9 @@ package com.codecool.codecoolshopspring.model.recipes;
 
 import com.codecool.codecoolshopspring.model.UserDTO;
 import com.codecool.codecoolshopspring.model.comments.RecipeCommentDTO;
-import com.codecool.codecoolshopspring.model.recipes.cookingphase.CookingPhase;
 import com.codecool.codecoolshopspring.model.recipes.cookingphase.CookingPhaseDTO;
-import com.codecool.codecoolshopspring.model.recipes.mealcomponent.MealComponent;
 import com.codecool.codecoolshopspring.model.recipes.mealcomponent.MealComponentDTO;
+import com.codecool.codecoolshopspring.model.votes.RecipeVoteDTO;
 import lombok.Getter;
 
 import java.util.Date;
@@ -18,6 +17,7 @@ public class RecipeDTO {
     private final long id;
     private final UserDTO userDTO;
     private final String title;
+    private final List<RecipeVoteDTO> recipeVotes;
     private final List<MealComponentDTO> mealComponents;
     private final List<CookingPhaseDTO> cookingPhases;
     private final List<RecipeCommentDTO> recipeComments;
@@ -29,6 +29,10 @@ public class RecipeDTO {
         this.id = recipe.getId();
         this.userDTO = new UserDTO(recipe.getUser());
         this.title = recipe.getTitle();
+
+        this.recipeVotes = recipe.getRecipeVotes().stream()
+                .map(RecipeVoteDTO::new)
+                .collect(Collectors.toList());
 
         this.mealComponents = recipe.getMealComponents().stream()
                 .map(MealComponentDTO::new)

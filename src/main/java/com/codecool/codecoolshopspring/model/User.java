@@ -2,6 +2,7 @@ package com.codecool.codecoolshopspring.model;
 
 import com.codecool.codecoolshopspring.model.comments.ProductComment;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
+import com.codecool.codecoolshopspring.model.votes.RecipeVote;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -42,6 +43,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeComment> recipeComments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecipeVote> recipeVotes = new ArrayList<>();
 
 
     public User(String username, String email, String password, String roles) {
