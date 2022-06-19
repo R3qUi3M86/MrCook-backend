@@ -5,7 +5,6 @@ import com.codecool.codecoolshopspring.model.comments.RecipeComment;
 import com.codecool.codecoolshopspring.model.comments.RecipeCommentDTO;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
 import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
-import com.codecool.codecoolshopspring.model.votes.RecipeVote;
 import com.codecool.codecoolshopspring.model.votes.VoteType;
 import com.codecool.codecoolshopspring.repository.RecipeCommentRepository;
 import com.codecool.codecoolshopspring.repository.RecipeRepository;

@@ -14,7 +14,6 @@ public class ProductCommentDTO {
     private final String body;
     private final Integer rating;
     private final UserDTO userDTO;
-//    private List<ProductCommentVote> productCommentVotes;
     private final Date createDate;
     private final Date modifyDate;
 
