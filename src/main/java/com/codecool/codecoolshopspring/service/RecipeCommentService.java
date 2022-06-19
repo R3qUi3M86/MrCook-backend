@@ -4,6 +4,9 @@ import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
 import com.codecool.codecoolshopspring.model.comments.RecipeCommentDTO;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
+import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
+import com.codecool.codecoolshopspring.model.votes.RecipeVote;
+import com.codecool.codecoolshopspring.model.votes.VoteType;
 import com.codecool.codecoolshopspring.repository.RecipeCommentRepository;
 import com.codecool.codecoolshopspring.repository.RecipeRepository;
 import lombok.RequiredArgsConstructor;
@@ -75,10 +78,31 @@ public class RecipeCommentService {
         }
     }
 
-//    public void upVoteRecipe(long id){
-//        Optional<Recipe> optRecipe = recipeRepository.findById(id);
-//        if (optRecipe.isPresent()){
-//
-//        }
-//    }
+    public void voteOnRecipeComment(long id, User user, VoteType voteType) {
+        Optional<RecipeComment> optRecipeComment = recipeCommentRepository.findById(id);
+        if (optRecipeComment.isPresent()) {
+            if (optRecipeComment.get().getUser().getId() == user.getId()) {
+                log.warn("Cannot vote on recipe id=" + id + " - user tried to vote on his own recipe comment");
+                return;
+            }
+            List<RecipeCommentVote> recipeCommentVotes = optRecipeComment.get().getRecipeCommentVotes();
+            for (RecipeCommentVote recipeCommentVote : recipeCommentVotes) {
+                if (recipeCommentVote.getUser().getId() == user.getId()) {
+                    if (recipeCommentVote.getVoteType() == voteType) {
+                        log.warn("Cannot up vote recipe comment id=" + id + " - user tried to cast same vote more than once");
+                    } else {
+                        optRecipeComment.get().withdrawVote(recipeCommentVote);
+                        recipeCommentRepository.save(optRecipeComment.get());
+                        log.info("User: " + user.getUsername() + " withdrew vote recipe comment id=" + id);
+                    }
+                    return;
+                }
+            }
+            optRecipeComment.get().castVote(user, voteType);
+            recipeCommentRepository.save(optRecipeComment.get());
+            log.info("User: " + user.getUsername() + " cast vote recipe comment id=" + id + " -> " + voteType);
+        } else {
+            log.warn("Cannot vote on recipe comment id=" + id + "  - does not exist in database!");
+        }
+    }
 }

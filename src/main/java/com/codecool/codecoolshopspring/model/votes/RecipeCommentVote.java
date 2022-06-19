@@ -2,6 +2,8 @@ package com.codecool.codecoolshopspring.model.votes;
 
 import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,10 +12,13 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class RecipeCommentVote {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotNull

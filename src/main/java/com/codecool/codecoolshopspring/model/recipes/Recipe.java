@@ -37,7 +37,6 @@ public class Recipe {
     @NotNull
     private String title;
 
-    @NotNull
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeVote> recipeVotes = new ArrayList<>();
 

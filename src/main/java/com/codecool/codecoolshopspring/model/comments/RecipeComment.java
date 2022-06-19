@@ -1,8 +1,9 @@
 package com.codecool.codecoolshopspring.model.comments;
 
 import com.codecool.codecoolshopspring.model.User;
-//import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
 import com.codecool.codecoolshopspring.model.recipes.Recipe;
+import com.codecool.codecoolshopspring.model.votes.RecipeCommentVote;
+import com.codecool.codecoolshopspring.model.votes.VoteType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -37,8 +38,8 @@ public class RecipeComment {
     @JoinColumn(name="fk_recipe", nullable = false)
     private Recipe recipe;
 
-//    @OneToMany(mappedBy = "recipe_comment")
-//    private List<RecipeCommentVote> recipeCommentVotes  = new ArrayList<>();
+    @OneToMany(mappedBy = "recipeComment", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecipeCommentVote> recipeCommentVotes = new ArrayList<>();
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -47,6 +48,18 @@ public class RecipeComment {
     @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
+
+    public void withdrawVote(RecipeCommentVote recipeCommentVote){
+        recipeCommentVotes.remove(recipeCommentVote);
+    }
+
+    public void castVote(User user, VoteType voteType){
+        recipeCommentVotes.add(RecipeCommentVote.builder()
+                .voteType(voteType)
+                .user(user)
+                .recipeComment(this)
+                .build());
+    }
 
     public void update(RecipeComment recipeComment){
         this.title = recipeComment.getTitle();

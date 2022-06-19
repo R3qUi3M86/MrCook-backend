@@ -3,6 +3,7 @@ package com.codecool.codecoolshopspring.controller.rest;
 import com.codecool.codecoolshopspring.model.User;
 import com.codecool.codecoolshopspring.model.comments.RecipeComment;
 import com.codecool.codecoolshopspring.model.comments.RecipeCommentDTO;
+import com.codecool.codecoolshopspring.model.votes.VoteType;
 import com.codecool.codecoolshopspring.service.RecipeCommentService;
 import com.codecool.codecoolshopspring.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -37,5 +38,17 @@ public class RecipeCommentRestController {
     @DeleteMapping("/recipe_comment/delete/{id}")
     public void deleteRecipeComment(@PathVariable String id){
         recipeCommentService.deleteRecipeComment(Long.parseLong(id));
+    }
+
+    @PostMapping("/recipe_comment/up_vote/{id}")
+    public void upVoteRecipe(@PathVariable String id){
+        User user = userService.getDefaultCustomerUser();
+        recipeCommentService.voteOnRecipeComment(Long.parseLong(id), user, VoteType.UP);
+    }
+
+    @PostMapping("/recipe_comment/down_vote/{id}")
+    public void downVoteRecipe(@PathVariable String id){
+        User user = userService.getDefaultCustomerUser();
+        recipeCommentService.voteOnRecipeComment(Long.parseLong(id), user, VoteType.DOWN);
     }
 }
