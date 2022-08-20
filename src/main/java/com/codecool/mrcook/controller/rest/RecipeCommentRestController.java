@@ -43,13 +43,13 @@ public class RecipeCommentRestController {
 
     @PostMapping("/recipe_comment/up_vote/{id}")
     public void upVoteRecipe(@PathVariable String id){
-        User user = userService.getDefaultCustomerUser();
+        User user = userService.getDefaultCustomerMemberUser();
         recipeCommentService.voteOnRecipeComment(Long.parseLong(id), user, VoteType.UP);
     }
 
     @PostMapping("/recipe_comment/down_vote/{id}")
     public void downVoteRecipe(@PathVariable String id){
-        User user = userService.getDefaultCustomerUser();
+        User user = userService.getDefaultCustomerMemberUser();
         recipeCommentService.voteOnRecipeComment(Long.parseLong(id), user, VoteType.DOWN);
     }
 }

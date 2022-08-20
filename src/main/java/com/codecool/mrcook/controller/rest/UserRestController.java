@@ -16,7 +16,7 @@ public class UserRestController {
 
     @GetMapping("/user/get_current")
     public UserDTO getCurrentUser(){
-        User user = userService.getDefaultAdminUser(); //To be changed
+        User user = userService.getDefaultCustomerUser(); //To be changed
         return new UserDTO(user);
     }
 }

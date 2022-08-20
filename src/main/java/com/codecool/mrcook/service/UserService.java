@@ -30,7 +30,11 @@ public class UserService implements UserDetailsService {
         return userRepository.getById((long) 1);
     }
 
-    public User getDefaultCustomerUser(){
+    public User getDefaultCustomerMemberUser(){
         return userRepository.getById((long) 2);
+    }
+
+    public User getDefaultCustomerUser(){
+        return userRepository.getById((long) 3);
     }
 }
