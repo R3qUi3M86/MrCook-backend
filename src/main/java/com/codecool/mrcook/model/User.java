@@ -35,6 +35,9 @@ public class User implements UserDetails {
     private String password;
 
     @NotNull
+    private boolean member;
+
+    @NotNull
     private String roles;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -48,10 +51,11 @@ public class User implements UserDetails {
     private List<RecipeVote> recipeVotes = new ArrayList<>();
 
 
-    public User(String username, String email, String password, String roles) {
+    public User(String username, String email, String password, boolean member, String roles) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.member = member;
         this.roles = roles;
     }
 
