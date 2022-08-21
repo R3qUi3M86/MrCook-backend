@@ -7,6 +7,7 @@ import com.codecool.mrcook.repository.ProductCommentRepository;
 import com.codecool.mrcook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,8 @@ public class ProductCommentService {
     }
 
     public List<ProductCommentDTO> getAll(){
-        List<ProductComment> productComments = productCommentRepository.findAll();
+        List<ProductComment> productComments = productCommentRepository
+                .findAll(Sort.by(Sort.Direction.DESC, "rating"));
         return productComments.stream().map(ProductCommentDTO::new).collect(Collectors.toList());
     }
 

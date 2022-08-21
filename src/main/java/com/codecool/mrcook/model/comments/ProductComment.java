@@ -24,6 +24,7 @@ public class ProductComment {
     private String title;
 
     @NotNull
+    @Column(length = 500)
     private String body;
 
     @NotNull

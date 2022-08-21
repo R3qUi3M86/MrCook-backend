@@ -8,4 +8,4 @@ VALUES ('admin@mrcook.com', 'pass', true, 'ADMIN', 'mr-cook', 1);
 INSERT INTO public.user(email, password, member, roles, username, fk_product_comment)
 VALUES ('stiepan@mrcook.com', 'pass2', true, 'CUSTOMER', 'stiepan', 2);
 INSERT INTO public.user(email, password, member, roles, username)
-VALUES ('marian@mrcook.com', 'pass3', false, 'CUSTOMER', 'marian');
+VALUES ('marian@mrcook.com', 'pass3', true, 'CUSTOMER', 'marian');

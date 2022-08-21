@@ -10,6 +10,13 @@ public class UserDTO {
     private final boolean member;
     private final boolean productComment;
 
+    public UserDTO(){
+        this.id = -1;
+        this.username = null;
+        this.member = false;
+        this.productComment = false;
+    }
+
     public UserDTO(User user){
         this.id = user.getId();
         this.username = user.getUsername();

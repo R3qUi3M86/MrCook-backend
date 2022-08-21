@@ -21,7 +21,7 @@ public class ProductCommentRestController {
 
     @PostMapping("/product_comment/add")
     public void addProductComment(@RequestBody ProductComment comment){
-        User user = userService.getDefaultAdminUser();
+        User user = userService.getDefaultCustomerUser();
         productCommentService.createProductComment(comment, user);
     }
 
