@@ -37,7 +37,7 @@ public class ProductCommentRestController {
 
     @DeleteMapping("/product_comment/delete/{id}")
     public void deleteProductComment(@PathVariable String id){
-        User user = userService.getDefaultAdminUser();
+        User user = userService.getDefaultCustomerUser();
         productCommentService.deleteProductComment(Long.parseLong(id), user);
     }
 }
