@@ -3,6 +3,7 @@ package com.codecool.mrcook.model;
 import com.codecool.mrcook.model.comments.ProductComment;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.votes.RecipeVote;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

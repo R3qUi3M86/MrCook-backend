@@ -26,15 +26,19 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public User getDefaultAdminUser(){
+    public User getAnonymousUser(){
         return userRepository.getById((long) 1);
     }
 
-    public User getDefaultCustomerMemberUser(){
+    public User getDefaultAdminUser(){
         return userRepository.getById((long) 2);
     }
 
-    public User getDefaultCustomerUser(){
+    public User getDefaultCustomerMemberUser(){
         return userRepository.getById((long) 3);
+    }
+
+    public User getDefaultCustomerUser(){
+        return userRepository.getById((long) 4);
     }
 }
