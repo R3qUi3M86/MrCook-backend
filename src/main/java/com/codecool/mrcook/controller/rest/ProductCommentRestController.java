@@ -3,6 +3,7 @@ package com.codecool.mrcook.controller.rest;
 import com.codecool.mrcook.model.User;
 import com.codecool.mrcook.model.comments.ProductComment;
 import com.codecool.mrcook.model.comments.ProductCommentDTO;
+import com.codecool.mrcook.security.CurrentUser;
 import com.codecool.mrcook.service.ProductCommentService;
 import com.codecool.mrcook.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,7 @@ public class ProductCommentRestController {
     private final UserService userService;
 
     @PostMapping("/product_comment/add")
-    public void addProductComment(@RequestBody ProductComment comment){
-        User user = userService.getDefaultCustomerUser();
+    public void addProductComment(@RequestBody ProductComment comment, @CurrentUser User user){
         productCommentService.createProductComment(comment, user);
     }
 
@@ -36,8 +36,7 @@ public class ProductCommentRestController {
     }
 
     @DeleteMapping("/product_comment/delete/{id}")
-    public void deleteProductComment(@PathVariable String id){
-        User user = userService.getDefaultCustomerUser();
+    public void deleteProductComment(@PathVariable String id, @CurrentUser User user){
         productCommentService.deleteProductComment(Long.parseLong(id), user);
     }
 }
