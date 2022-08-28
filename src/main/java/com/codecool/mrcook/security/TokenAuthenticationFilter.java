@@ -1,11 +1,8 @@
 package com.codecool.mrcook.security;
 
 import com.codecool.mrcook.repository.UserRepository;
-import com.codecool.mrcook.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.SecurityContextProvider;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

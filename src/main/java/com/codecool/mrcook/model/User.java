@@ -39,6 +39,9 @@ public class User implements UserDetails {
     private boolean member;
 
     @NotNull
+    private boolean banned;
+
+    @NotNull
     private String roles;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -52,11 +55,12 @@ public class User implements UserDetails {
     private List<RecipeVote> recipeVotes = new ArrayList<>();
 
 
-    public User(String username, String email, String password, boolean member, String roles) {
+    public User(String username, String email, String password, boolean member, boolean banned, String roles) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.member = member;
+        this.banned = banned;
         this.roles = roles;
     }
 
@@ -74,7 +78,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !banned;
     }
 
     @Override

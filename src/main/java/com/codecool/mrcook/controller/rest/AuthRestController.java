@@ -23,7 +23,6 @@ import java.net.http.HttpResponse;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class AuthRestController {
 
     private final TokenProvider tokenProvider;
