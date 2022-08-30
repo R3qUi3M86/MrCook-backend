@@ -53,7 +53,7 @@ public class ProductCommentRestController {
     public ResponseEntity<?> deleteProductComment(@PathVariable String id, @CurrentUser User user){
         if (Objects.equals(user.getRoles(), "ADMIN")){
             if (productCommentService.deleteProductCommentByAdmin(Long.parseLong(id)))
-                return ResponseEntity.ok().body(new UserDTO((User)userService.loadUserByUsername(user.getUsername())));
+                return ResponseEntity.ok().body(new UserDTO((User)userService.loadUserByUsername(user.getEmail())));
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
         } else if (user.getProductComment() != null) {
             if  (user.getProductComment().getId() == Long.parseLong(id)) {

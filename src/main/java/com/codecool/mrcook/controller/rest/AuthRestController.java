@@ -2,7 +2,7 @@ package com.codecool.mrcook.controller.rest;
 
 import com.codecool.mrcook.model.User;
 import com.codecool.mrcook.model.UserDTO;
-import com.codecool.mrcook.security.AuthCredentialsRequest;
+import com.codecool.mrcook.controller.rest.request.AuthCredentialsRequest;
 import com.codecool.mrcook.security.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,12 +13,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.net.http.HttpResponse;
 
 @Slf4j
 @RestController
@@ -34,7 +31,7 @@ public class AuthRestController {
             Authentication authentication = authManager
                     .authenticate(
                             new UsernamePasswordAuthenticationToken(
-                                    request.getUsername(), request.getPassword()
+                                    request.getEmail(), request.getPassword()
                             )
                     );
 

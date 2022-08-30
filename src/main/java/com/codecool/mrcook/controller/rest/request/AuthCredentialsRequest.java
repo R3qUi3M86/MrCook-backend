@@ -1,4 +1,4 @@
-package com.codecool.mrcook.security;
+package com.codecool.mrcook.controller.rest.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class AuthCredentialsRequest {
 
-    private String username;
+    private String email;
     private String password;
 
 

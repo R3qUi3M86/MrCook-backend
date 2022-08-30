@@ -23,6 +23,10 @@ public class ProductCommentService {
     private final UserRepository userRepository;
 
     public boolean createProductComment(ProductComment comment, User user) {
+        if (user.isBanned()){
+            log.warn("Banned user tried to comment product. Comment discarded!");
+            return false;
+        }
         if (user.getProductComment() == null) {
             user.setProductComment(comment);
             userRepository.save(user);

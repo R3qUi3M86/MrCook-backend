@@ -39,6 +39,9 @@ public class User implements UserDetails {
     private boolean member;
 
     @NotNull
+    private boolean subscriber;
+
+    @NotNull
     private boolean banned;
 
     @NotNull
@@ -78,7 +81,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !banned;
+        return true;
     }
 
     @Override

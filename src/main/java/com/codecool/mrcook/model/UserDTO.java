@@ -11,6 +11,7 @@ public class UserDTO {
     private final String username;
     private boolean member;
     private boolean banned;
+    private boolean subscriber;
     private String roles;
     private boolean productComment;
 
@@ -19,6 +20,7 @@ public class UserDTO {
         this.username = user.getUsername();
         this.member = user.isMember();
         this.banned = user.isBanned();
+        this.subscriber = user.isSubscriber();
         this.roles = user.getRoles();
         this.productComment = user.getProductComment() != null;
     }
