@@ -4,6 +4,7 @@ import com.codecool.mrcook.model.User;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.comments.RecipeCommentDTO;
 import com.codecool.mrcook.model.votes.VoteType;
+import com.codecool.mrcook.security.CurrentUser;
 import com.codecool.mrcook.service.RecipeCommentService;
 import com.codecool.mrcook.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,7 @@ public class RecipeCommentRestController {
     private final UserService userService;
 
     @PostMapping("/recipe_comment/add/{recipeId}")
-    public void addRecipeComment(@RequestBody RecipeComment comment, @PathVariable String recipeId){
-        User user = userService.getDefaultAdminUser();
+    public void addRecipeComment(@RequestBody RecipeComment comment, @PathVariable String recipeId, @CurrentUser User user){
         recipeCommentService.createRecipeComment(comment, user, Long.parseLong(recipeId));
     }
 
@@ -42,14 +42,12 @@ public class RecipeCommentRestController {
     }
 
     @PostMapping("/recipe_comment/up_vote/{id}")
-    public void upVoteRecipe(@PathVariable String id){
-        User user = userService.getDefaultCustomerMemberUser();
+    public void upVoteRecipe(@PathVariable String id, @CurrentUser User user){
         recipeCommentService.voteOnRecipeComment(Long.parseLong(id), user, VoteType.UP);
     }
 
     @PostMapping("/recipe_comment/down_vote/{id}")
-    public void downVoteRecipe(@PathVariable String id){
-        User user = userService.getDefaultCustomerMemberUser();
+    public void downVoteRecipe(@PathVariable String id, @CurrentUser User user){
         recipeCommentService.voteOnRecipeComment(Long.parseLong(id), user, VoteType.DOWN);
     }
 }

@@ -3,6 +3,7 @@ package com.codecool.mrcook.model;
 import com.codecool.mrcook.model.comments.ProductComment;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.votes.RecipeVote;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,10 +26,12 @@ public class User implements UserDetails {
     private long id;
 
     @NotNull
+    @Column(length = 30)
     private String username;
 
     @Email
     @NotNull
+    @Column(length = 100)
     private String email;
 
     @NotNull
@@ -36,6 +39,12 @@ public class User implements UserDetails {
 
     @NotNull
     private boolean member;
+
+    @NotNull
+    private boolean subscriber;
+
+    @NotNull
+    private boolean banned;
 
     @NotNull
     private String roles;
@@ -51,11 +60,12 @@ public class User implements UserDetails {
     private List<RecipeVote> recipeVotes = new ArrayList<>();
 
 
-    public User(String username, String email, String password, boolean member, String roles) {
+    public User(String username, String email, String password, boolean member, boolean banned, String roles) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.member = member;
+        this.banned = banned;
         this.roles = roles;
     }
 

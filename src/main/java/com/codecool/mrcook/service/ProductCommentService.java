@@ -22,14 +22,20 @@ public class ProductCommentService {
     private final ProductCommentRepository productCommentRepository;
     private final UserRepository userRepository;
 
-    public void createProductComment(ProductComment comment, User user) {
+    public boolean createProductComment(ProductComment comment, User user) {
+        if (user.isBanned()){
+            log.warn("Banned user tried to comment product. Comment discarded!");
+            return false;
+        }
         if (user.getProductComment() == null) {
             user.setProductComment(comment);
             userRepository.save(user);
             comment.setUser(user);
             log.info("User commented on product: " + comment);
+            return true;
         } else {
             log.warn("User tried to comment product more than once. Comment discarded!");
+            return false;
         }
     }
 
@@ -52,14 +58,23 @@ public class ProductCommentService {
 
     }
 
-    public void deleteProductComment(long id, User user){
+    public void deleteProductComment(User user){
+        log.info("User deleted product comment: " + user.getProductComment());
+        user.setProductComment(null);
+        userRepository.save(user);
+    }
+
+    public boolean deleteProductCommentByAdmin(long id){
         Optional<ProductComment> optProductComment = productCommentRepository.findById(id);
         if (optProductComment.isPresent()){
+            User user = optProductComment.get().getUser();
             user.setProductComment(null);
             userRepository.save(user);
-            log.info("User deleted product comment: " + optProductComment.get());
+            log.info("Admin deleted product comment: " + optProductComment.get());
+            return true;
         } else {
             log.warn("Cannot delete product comment id=" + id + " - does not exist in database!");
+            return false;
         }
     }
 
