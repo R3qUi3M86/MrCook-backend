@@ -1,42 +1,46 @@
 package com.codecool.mrcook.controller.rest;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.recipes.Recipe;
 import com.codecool.mrcook.model.recipes.RecipeDTO;
 import com.codecool.mrcook.model.votes.VoteType;
 import com.codecool.mrcook.security.CurrentUser;
 import com.codecool.mrcook.service.RecipeService;
-import com.codecool.mrcook.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
 public class RecipeRestController {
 
     private final RecipeService recipeService;
-    private final UserService userService;
-
-    @PostMapping("/recipes/add")
-    public void addRecipe(@RequestBody Recipe recipe, @CurrentUser User user){
-        recipeService.createUserRecipe(recipe, user);
-    }
 
     @GetMapping("/recipes/get/{id}")
     public RecipeDTO getRecipe(@PathVariable String id){
         return recipeService.getRecipe(Long.parseLong(id));
     }
 
+    @GetMapping("/recipes/get_all")
+    public List<RecipeDTO> getAllRecipes(){
+        return recipeService.getAllRecipes();
+    }
+
+    @PostMapping("/recipes/add")
+    public void addRecipe(@RequestBody Recipe recipe, @CurrentUser User user){
+        recipeService.createUserRecipe(recipe, user);
+    }
+
     @PutMapping("/recipes/update")
-    public void updateRecipe(@RequestBody Recipe recipe){
+    public void updateRecipe(@RequestBody Recipe recipe, @CurrentUser User user){
         recipeService.updateRecipe(recipe);
     }
 
     @DeleteMapping("/recipes/delete/{id}")
-    public void deleteRecipe(@PathVariable String id){
+    public void deleteRecipe(@PathVariable String id, @CurrentUser User user){
         recipeService.deleteRecipe(Long.parseLong(id));
     }
 

@@ -1,6 +1,6 @@
 package com.codecool.mrcook.security;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

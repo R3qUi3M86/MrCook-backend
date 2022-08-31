@@ -1,6 +1,6 @@
 package com.codecool.mrcook.repository;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

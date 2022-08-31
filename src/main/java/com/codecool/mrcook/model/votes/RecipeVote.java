@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.votes;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.recipes.Recipe;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

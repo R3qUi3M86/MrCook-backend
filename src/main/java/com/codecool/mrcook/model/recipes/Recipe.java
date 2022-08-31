@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.recipes;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.recipes.cookingphase.CookingPhase;
 import com.codecool.mrcook.model.recipes.mealcomponent.MealComponent;

@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.comments;
 
-import com.codecool.mrcook.model.UserDTO;
+import com.codecool.mrcook.model.user.UserDTO;
 import lombok.Getter;
 
 import java.util.Date;

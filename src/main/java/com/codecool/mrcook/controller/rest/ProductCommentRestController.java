@@ -1,7 +1,7 @@
 package com.codecool.mrcook.controller.rest;
 
-import com.codecool.mrcook.model.User;
-import com.codecool.mrcook.model.UserDTO;
+import com.codecool.mrcook.model.user.User;
+import com.codecool.mrcook.model.user.UserDTO;
 import com.codecool.mrcook.model.comments.ProductComment;
 import com.codecool.mrcook.model.comments.ProductCommentDTO;
 import com.codecool.mrcook.security.CurrentUser;
@@ -19,21 +19,20 @@ import java.util.Objects;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-//@CrossOrigin(origins = "http://localhost:3000")
 public class ProductCommentRestController {
     private final ProductCommentService productCommentService;
     private final UserService userService;
+
+    @GetMapping("/product_comment/get_all")
+    public List<ProductCommentDTO> getAllProductComments(){
+        return productCommentService.getAll();
+    }
 
     @PostMapping("/product_comment/add")
     public ResponseEntity<?> addProductComment(@RequestBody ProductComment comment, @CurrentUser User user){
         if (productCommentService.createProductComment(comment, user))
             return ResponseEntity.ok().body(new UserDTO(user));
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).build();
-    }
-
-    @GetMapping("/product_comment/get_all")
-    public List<ProductCommentDTO> getAllProductComments(){
-        return productCommentService.getAll();
     }
 
     @PutMapping("/product_comment/update")

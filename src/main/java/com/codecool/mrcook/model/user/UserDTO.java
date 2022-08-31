@@ -1,5 +1,6 @@
-package com.codecool.mrcook.model;
+package com.codecool.mrcook.model.user;
 
+import com.codecool.mrcook.model.user.User;
 import lombok.Getter;
 import lombok.Setter;
 

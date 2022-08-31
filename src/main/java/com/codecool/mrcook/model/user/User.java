@@ -1,4 +1,4 @@
-package com.codecool.mrcook.model;
+package com.codecool.mrcook.model.user;
 
 import com.codecool.mrcook.model.comments.ProductComment;
 import com.codecool.mrcook.model.comments.RecipeComment;

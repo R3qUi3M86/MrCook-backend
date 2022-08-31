@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.comments;
 
-import com.codecool.mrcook.model.UserDTO;
+import com.codecool.mrcook.model.user.UserDTO;
 import com.codecool.mrcook.model.votes.RecipeCommentVoteDTO;
 import lombok.Getter;
 

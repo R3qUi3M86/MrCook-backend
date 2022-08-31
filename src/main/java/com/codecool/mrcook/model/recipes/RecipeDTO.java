@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.recipes;
 
-import com.codecool.mrcook.model.UserDTO;
+import com.codecool.mrcook.model.user.UserDTO;
 import com.codecool.mrcook.model.comments.RecipeCommentDTO;
 import com.codecool.mrcook.model.recipes.cookingphase.CookingPhaseDTO;
 import com.codecool.mrcook.model.recipes.mealcomponent.MealComponentDTO;

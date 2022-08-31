@@ -1,6 +1,6 @@
 package com.codecool.mrcook.service;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.recipes.Recipe;
 import com.codecool.mrcook.model.recipes.RecipeDTO;
 import com.codecool.mrcook.model.votes.RecipeVote;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,14 @@ public class RecipeService {
             log.warn("Recipe id=" + id + " not found in database!");
             return null;
         }
+    }
+
+    public List<RecipeDTO> getAllRecipes(){
+        List<Recipe> recipes = recipeRepository.findAll();
+        List<RecipeDTO> recipeDTOs= new ArrayList<>();
+        for (Recipe recipe : recipes)
+            recipeDTOs.add(new RecipeDTO(recipe));
+        return recipeDTOs;
     }
 
     public void updateRecipe(Recipe updatedRecipe){
