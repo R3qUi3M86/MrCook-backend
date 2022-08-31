@@ -49,9 +49,7 @@ public class UserRestController {
                                     request.getEmail(), request.getPassword()
                             )
                     );
-
             User user = (User) authentication.getPrincipal();
-
             return ResponseEntity.ok()
                     .header(
                             HttpHeaders.AUTHORIZATION,
