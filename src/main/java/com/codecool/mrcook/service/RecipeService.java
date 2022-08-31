@@ -1,6 +1,7 @@
 package com.codecool.mrcook.service;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.favourites.RecipeFavourite;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.recipes.Recipe;
 import com.codecool.mrcook.model.recipes.RecipeDTO;
 import com.codecool.mrcook.model.votes.RecipeVote;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +42,14 @@ public class RecipeService {
             log.warn("Recipe id=" + id + " not found in database!");
             return null;
         }
+    }
+
+    public List<RecipeDTO> getAllRecipes(){
+        List<Recipe> recipes = recipeRepository.findAll();
+        List<RecipeDTO> recipeDTOs= new ArrayList<>();
+        for (Recipe recipe : recipes)
+            recipeDTOs.add(new RecipeDTO(recipe));
+        return recipeDTOs;
     }
 
     public void updateRecipe(Recipe updatedRecipe){
@@ -93,5 +103,41 @@ public class RecipeService {
         } else {
             log.warn("Cannot vote on recipe id=" + id + "  - does not exist in database!");
         }
+    }
+
+    public boolean addRecipeToFavourites(long id, User user){
+        Optional<Recipe> optRecipe = recipeRepository.findById(id);
+        if (optRecipe.isPresent()){
+            for (RecipeFavourite fav : optRecipe.get().getRecipeFavourites()){
+                if (fav.getUser().getId() == user.getId()){
+                    log.warn("Cannot add recipe id=" + id + " - to favourites. Already there!");
+                    return false;
+                }
+            }
+            optRecipe.get().addToFavourites(user);
+            recipeRepository.save(optRecipe.get());
+            log.info("User: "+ user.getUsername() +" added to favourites recipe id=" + id);
+            return true;
+        }
+        log.warn("Cannot add to favourites recipe id=" + id + " - does not exist in database!");
+        return false;
+    }
+
+    public boolean removeRecipeFromFavourites(long id, User user){
+        Optional<Recipe> optRecipe = recipeRepository.findById(id);
+        if (optRecipe.isPresent()){
+            for (RecipeFavourite fav : optRecipe.get().getRecipeFavourites()){
+                if (fav.getUser().getId() == user.getId()){
+                    optRecipe.get().removeFromFavourites(fav);
+                    recipeRepository.save(optRecipe.get());
+                    log.info("User: "+ user.getUsername() +" removed from favourites recipe id=" + id);
+                    return true;
+                }
+            }
+            log.warn("Cannot remove from favourites recipe id=" + id + " - to favourites. Already removed!");
+            return false;
+        }
+        log.warn("Cannot add to favourites recipe id=" + id + " - does not exist in database!");
+        return false;
     }
 }

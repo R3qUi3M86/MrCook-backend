@@ -1,6 +1,7 @@
 package com.codecool.mrcook.model.recipes;
 
-import com.codecool.mrcook.model.UserDTO;
+import com.codecool.mrcook.model.favourites.RecipeFavouriteDTO;
+import com.codecool.mrcook.model.user.UserDTO;
 import com.codecool.mrcook.model.comments.RecipeCommentDTO;
 import com.codecool.mrcook.model.recipes.cookingphase.CookingPhaseDTO;
 import com.codecool.mrcook.model.recipes.mealcomponent.MealComponentDTO;
@@ -15,9 +16,10 @@ import java.util.stream.Collectors;
 public class RecipeDTO {
 
     private final long id;
-    private final UserDTO userDTO;
+    private final String author;
     private final String title;
     private final List<RecipeVoteDTO> recipeVotes;
+    private final List<RecipeFavouriteDTO> recipeFavourites;
     private final List<MealComponentDTO> mealComponents;
     private final List<CookingPhaseDTO> cookingPhases;
     private final List<RecipeCommentDTO> recipeComments;
@@ -27,11 +29,15 @@ public class RecipeDTO {
 
     public RecipeDTO(Recipe recipe){
         this.id = recipe.getId();
-        this.userDTO = new UserDTO(recipe.getUser());
+        this.author = recipe.getUser().getUsername();
         this.title = recipe.getTitle();
 
         this.recipeVotes = recipe.getRecipeVotes().stream()
                 .map(RecipeVoteDTO::new)
+                .collect(Collectors.toList());
+
+        this.recipeFavourites = recipe.getRecipeFavourites().stream()
+                .map(RecipeFavouriteDTO::new)
                 .collect(Collectors.toList());
 
         this.mealComponents = recipe.getMealComponents().stream()

@@ -2,9 +2,8 @@ package com.codecool.mrcook.service;
 
 import com.codecool.mrcook.controller.rest.request.RegisterRequest;
 import com.codecool.mrcook.controller.rest.response.RegisterResult;
-import com.codecool.mrcook.model.User;
-import com.codecool.mrcook.model.UserDTO;
-import com.codecool.mrcook.model.UserRole;
+import com.codecool.mrcook.model.user.User;
+import com.codecool.mrcook.model.user.UserRole;
 import com.codecool.mrcook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

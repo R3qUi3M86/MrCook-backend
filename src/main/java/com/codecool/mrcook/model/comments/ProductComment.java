@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.comments;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;

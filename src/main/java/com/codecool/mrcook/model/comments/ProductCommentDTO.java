@@ -1,6 +1,5 @@
 package com.codecool.mrcook.model.comments;
 
-import com.codecool.mrcook.model.UserDTO;
 import lombok.Getter;
 
 import java.util.Date;
@@ -13,7 +12,7 @@ public class ProductCommentDTO {
     private final String title;
     private final String body;
     private final Integer rating;
-    private final UserDTO userDTO;
+    private final String username;
     private final Date createDate;
     private final Date modifyDate;
 
@@ -22,7 +21,7 @@ public class ProductCommentDTO {
         this.title = productComment.getTitle();
         this.body = productComment.getBody();
         this.rating = productComment.getRating();
-        this.userDTO = new UserDTO(productComment.getUser());
+        this.username = productComment.getUser().getUsername();
         this.createDate = productComment.getCreateDate();
         this.modifyDate = productComment.getModifyDate();
     }

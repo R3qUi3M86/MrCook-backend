@@ -1,6 +1,6 @@
 package com.codecool.mrcook.repository;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.recipes.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;

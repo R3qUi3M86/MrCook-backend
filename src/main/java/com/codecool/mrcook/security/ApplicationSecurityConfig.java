@@ -69,9 +69,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 // Our public endpoints
                 .antMatchers(HttpMethod.GET, "/product_comment/get_all").permitAll()
-//                .antMatchers(HttpMethod.GET, "/user/get_current").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/register").permitAll()
+                .antMatchers(HttpMethod.GET, "/recipes/get/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/recipes/get_all").permitAll()
+                .antMatchers(HttpMethod.GET, "/recipe_comment/get_all/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/register").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated();
 

@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.comments;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.recipes.Recipe;
 import com.codecool.mrcook.model.votes.RecipeCommentVote;
 import com.codecool.mrcook.model.votes.VoteType;

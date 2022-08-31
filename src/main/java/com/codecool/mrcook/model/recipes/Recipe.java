@@ -1,6 +1,7 @@
 package com.codecool.mrcook.model.recipes;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.favourites.RecipeFavourite;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.recipes.cookingphase.CookingPhase;
 import com.codecool.mrcook.model.recipes.mealcomponent.MealComponent;
@@ -39,6 +40,9 @@ public class Recipe {
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecipeVote> recipeVotes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RecipeFavourite> recipeFavourites = new ArrayList<>();
 
     @NotNull
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -102,6 +106,17 @@ public class Recipe {
                 .user(user)
                 .recipe(this)
                 .build());
+    }
+
+    public void addToFavourites(User user){
+        recipeFavourites.add(RecipeFavourite.builder()
+                .user(user)
+                .recipe(this)
+                .build());
+    }
+
+    public void removeFromFavourites(RecipeFavourite fav){
+        recipeFavourites.remove(fav);
     }
 
     @Override

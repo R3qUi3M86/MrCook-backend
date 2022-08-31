@@ -1,5 +1,4 @@
-package com.codecool.mrcook.model.votes;
-
+package com.codecool.mrcook.model.favourites;
 import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.recipes.Recipe;
 import lombok.AllArgsConstructor;
@@ -8,22 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RecipeVote {
+public class RecipeFavourite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    private VoteType voteType;
 
     @ManyToOne
     @JoinColumn(name = "fk_user", nullable = false)
@@ -35,11 +29,11 @@ public class RecipeVote {
 
     @Override
     public String toString() {
-        return "RecipeVote{" +
+        return "RecipeFavourite{" +
                 "id=" + id +
-                ", voteType=" + voteType +
                 ", user=" + user.getUsername() +
                 ", recipe=" + recipe.getId() +
                 '}';
     }
 }
+

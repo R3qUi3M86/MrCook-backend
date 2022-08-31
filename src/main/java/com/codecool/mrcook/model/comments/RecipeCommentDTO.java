@@ -1,6 +1,6 @@
 package com.codecool.mrcook.model.comments;
 
-import com.codecool.mrcook.model.UserDTO;
+import com.codecool.mrcook.model.user.UserDTO;
 import com.codecool.mrcook.model.votes.RecipeCommentVoteDTO;
 import lombok.Getter;
 
@@ -15,7 +15,7 @@ public class RecipeCommentDTO {
     private final long id;
     private final String title;
     private final String body;
-    private final UserDTO userDTO;
+    private final String author;
     private final long recipeId;
     private List<RecipeCommentVoteDTO> recipeCommentVotes;
     private final Date createDate;
@@ -25,7 +25,7 @@ public class RecipeCommentDTO {
         this.id = recipeComment.getId();
         this.title = recipeComment.getTitle();
         this.body = recipeComment.getBody();
-        this.userDTO = new UserDTO(recipeComment.getUser());
+        this.author = recipeComment.getUser().getUsername();
         this.recipeId = recipeComment.getRecipe().getId();
         this.recipeCommentVotes = recipeComment.getRecipeCommentVotes().stream()
                 .map(RecipeCommentVoteDTO::new)

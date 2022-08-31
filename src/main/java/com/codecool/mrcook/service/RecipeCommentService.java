@@ -1,6 +1,6 @@
 package com.codecool.mrcook.service;
 
-import com.codecool.mrcook.model.User;
+import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.comments.RecipeCommentDTO;
 import com.codecool.mrcook.model.recipes.Recipe;
