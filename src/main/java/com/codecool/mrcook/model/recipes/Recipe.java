@@ -1,6 +1,8 @@
 package com.codecool.mrcook.model.recipes;
 
 import com.codecool.mrcook.model.favourites.RecipeFavourite;
+import com.codecool.mrcook.model.recipes.helpers.RecipeFlagsEvaluator;
+import com.codecool.mrcook.model.recipes.helpers.RecipeMacroCalculator;
 import com.codecool.mrcook.model.user.User;
 import com.codecool.mrcook.model.comments.RecipeComment;
 import com.codecool.mrcook.model.recipes.cookingphase.CookingPhase;
@@ -65,6 +67,47 @@ public class Recipe {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifyDate;
 
+    @NotNull
+    private boolean vegan;
+
+    @NotNull
+    private boolean vegetarian;
+
+    @NotNull
+    private boolean carnivore;
+
+    @NotNull
+    private boolean fish;
+
+    @NotNull
+    private boolean gluten;
+
+    @NotNull
+    private boolean lowFat;
+
+    @NotNull
+    private boolean lowCarbs;
+
+    @NotNull
+    private boolean hiProtein;
+
+    @NotNull
+    private int calories;
+
+    @NotNull
+    private float protein;
+
+    @NotNull
+    private float carbs;
+
+    @NotNull
+    private float fat;
+
+    public void setRecipeDetails(){
+        RecipeMacroCalculator.updateMacronutrients(this);
+        RecipeFlagsEvaluator.updateSearchFlags(this);
+    }
+
     public void setMealComponentsRelation(){
         mealComponents.forEach(component -> component.setRecipe(this));
     }
@@ -93,6 +136,7 @@ public class Recipe {
         this.title = recipe.getTitle();
         updateMealComponents(recipe.getMealComponents());
         updateCookingPhases(recipe.getCookingPhases());
+        setRecipeDetails();
         this.image = recipe.getImage();
     }
 
