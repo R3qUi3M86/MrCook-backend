@@ -68,7 +68,7 @@ public enum Ingredient {
     WATER("Water", "Woda", IngredientType.OTHER,
             true, true, false,
             0, 0f, 0f, 0f),
-    YEAST("Yeast", "Drożdże", IngredientType.OTHER,
+    DEHYDRATED_YEAST("Dehydrated yeast", "Drożdże w proszku", IngredientType.OTHER,
           true, true, false,
             92, 11.3f, 2f, 14.5f);
 

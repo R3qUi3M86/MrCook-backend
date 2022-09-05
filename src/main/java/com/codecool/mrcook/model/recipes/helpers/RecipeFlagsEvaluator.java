@@ -29,7 +29,7 @@ public class RecipeFlagsEvaluator {
     private static void updateVegetarian(Recipe recipe){
         List<MealComponent> vegetarianComponents = recipe.getMealComponents().stream()
                 .filter(comp -> comp.getIngredient().isVegetarian()).toList();
-        recipe.setVegan(vegetarianComponents.size() == recipe.getMealComponents().size());
+        recipe.setVegetarian(vegetarianComponents.size() == recipe.getMealComponents().size());
     }
 
     private static void updateCarnivore(Recipe recipe){
