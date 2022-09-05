@@ -12,7 +12,8 @@ public enum IngredientType {
     DAIRY("Dairy", "Nabiał"),
     GRAIN("Grain", "Ziarno"),
     FAT("Fat", "Tłuszcz"),
-    NUT("Nut", "Orzech");
+    NUT("Nut", "Orzech"),
+    OTHER("Other", "Inne");
 
     private final String enName;
     private final String plName;
