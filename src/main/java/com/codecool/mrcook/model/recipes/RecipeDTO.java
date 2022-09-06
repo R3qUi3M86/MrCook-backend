@@ -8,6 +8,7 @@ import com.codecool.mrcook.model.recipes.mealcomponent.MealComponentDTO;
 import com.codecool.mrcook.model.votes.RecipeVoteDTO;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,6 +27,18 @@ public class RecipeDTO {
     private final byte[] image;
     private final Date createDate;
     private final Date modifyDate;
+    private final boolean vegan;
+    private final boolean vegetarian;
+    private final boolean carnivore;
+    private final boolean fish;
+    private final boolean gluten;
+    private final boolean lowFat;
+    private final boolean lowCarbs;
+    private final boolean hiProtein;
+    private final int calories;
+    private final float protein;
+    private final float carbs;
+    private final float fat;
 
     public RecipeDTO(Recipe recipe){
         this.id = recipe.getId();
@@ -55,5 +68,17 @@ public class RecipeDTO {
         this.image = recipe.getImage();
         this.createDate = recipe.getCreateDate();
         this.modifyDate = recipe.getModifyDate();
+        this.vegan = recipe.isVegan();
+        this.vegetarian = recipe.isVegetarian();
+        this.carnivore = recipe.isCarnivore();
+        this.fish = recipe.isFish();
+        this.gluten = recipe.isGluten();
+        this.lowFat = recipe.isLowFat();
+        this.lowCarbs = recipe.isLowCarbs();
+        this.hiProtein = recipe.isHiProtein();
+        this.calories = recipe.getCalories();
+        this.protein = recipe.getProtein();
+        this.carbs = recipe.getCarbs();
+        this.fat = recipe.getFat();
     }
 }

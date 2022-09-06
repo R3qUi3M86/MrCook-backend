@@ -30,6 +30,7 @@ public class RecipeService {
         recipe.setUser(user);
         recipe.setMealComponentsRelation();
         recipe.setCookingPhasesRelation();
+        recipe.setRecipeDetails();
         recipeRepository.save(recipe);
         log.info("User added new recipe: " + recipe);
     }

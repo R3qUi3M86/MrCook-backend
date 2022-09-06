@@ -8,10 +8,12 @@ public enum IngredientType {
     FRUIT("Fruit", "Owoc"),
     SPICE("Spice", "Przyprawa"),
     MEAT("Meat", "Mięso"),
+    FISH("Fish/Seafood", "Ryba/Owoce morza"),
     DAIRY("Dairy", "Nabiał"),
     GRAIN("Grain", "Ziarno"),
     FAT("Fat", "Tłuszcz"),
-    NUT("Nut", "Orzech");
+    NUT("Nut", "Orzech"),
+    OTHER("Other", "Inne");
 
     private final String enName;
     private final String plName;

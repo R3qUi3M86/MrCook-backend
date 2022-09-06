@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum CookingPhaseName {
     CHOP("Chop", "Posiekaj"),
     GRATE("Grate", "Zetrzyj"),
-    BAKE("Bake", "Piecz"),
+    BAKE_220("Bake in 200C", "Piecz w 200C"),
     SQUEEZE("Squeeze", "Wyciśnij"),
     CRUSH("Crush", "Zgnieć"),
     ROLL("Roll", "Zawiń"),
