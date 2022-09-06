@@ -18,6 +18,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -137,6 +139,7 @@ public class Recipe {
         updateMealComponents(recipe.getMealComponents());
         updateCookingPhases(recipe.getCookingPhases());
         setRecipeDetails();
+        this.modifyDate = Timestamp.from(Instant.now());
         this.image = recipe.getImage();
     }
 

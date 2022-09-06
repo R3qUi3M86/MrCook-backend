@@ -20,7 +20,7 @@ public class RegisterRequest {
     }
 
     private boolean userNameIsValid(){
-        return username.matches("[a-zA-Z\\d-_]+") && username.length() > 1 && username.length() <= 30;
+        return username.matches("[a-zA-Z\\d-_]+") && username.length() > 1 && username.length() <= 16;
     }
 
     private boolean emailIsValid(){
